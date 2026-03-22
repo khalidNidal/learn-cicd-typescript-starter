@@ -34,3 +34,5 @@ jobs:
         run: npm install
       - name: Run formatting check
         run: npm run format:check
+      - name: Run linter
+        run: npm run lint
