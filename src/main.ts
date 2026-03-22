@@ -49,6 +49,4 @@ app.listen(config.api.port, () => {
 });
 
 
-function unused() {
-  // this function does nothing
-}
+
