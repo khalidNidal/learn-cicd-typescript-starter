@@ -24,7 +24,6 @@ jobs:
       - name: Build the app
         run: npm run build
 
-      # الخطوات الجديدة للأتمتة
       - id: 'auth'
         uses: 'google-github-actions/auth@v2'
         with:
@@ -36,3 +35,12 @@ jobs:
       - name: 'Build and Push to Artifact Registry'
         run: |
           gcloud builds submit --tag us-central1-docker.pkg.dev/notely-project-laeth/notely-ar-repo/notely:latest .
+
+      - name: 'Deploy to Cloud Run'
+        run: |
+          gcloud run deploy notely \
+            --image us-central1-docker.pkg.dev/notely-project-laeth/notely-ar-repo/notely:latest \
+            --region us-central1 \
+            --allow-unauthenticated \
+            --project notely-project-laeth \
+            --max-instances=4
